@@ -15,6 +15,25 @@ void tabloyu_yazdir(char tablo[satir][sutun])
     }
 }
 
+void tabloyu_doldur(char tablo[satir][sutun])
+{
+    int n = 0;
+
+    while(n<28)
+    {
+        int i = rand()%9;
+        int j = rand()%9;
+
+        if(tablo[i][j]=='-')
+        {
+            int x = rand()%9;
+            tablo[i][j]='1'+x;
+            n++;
+        }
+    }
+    tabloyu_yazdir(tablo);
+}
+
 
 
 
@@ -29,7 +48,8 @@ int main() {
         }
     }
 
-    tabloyu_yazdir(tablo);
+    tabloyu_doldur(tablo);
+
 
     return 0;
 }
