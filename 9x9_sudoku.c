@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define N 9
 
@@ -12,6 +13,60 @@ void tabloyu_yazdir(char tablo[N][N])
     }
     printf("\n");
     }
+}
+
+int sudoku_coz(char tablo[N][N])
+{
+    int satir,sutun;
+    int boshucre_bulundu = 0;
+
+    //bos hücre arıyoruz
+    for(satir =0;satir<N;satir++)
+    {
+        for(sutun =0;sutun<N;sutun++)
+        {
+            if(tablo[satir][sutun]=='-')
+            {
+            boshucre_bulundu = 1;
+            break;
+            }
+        }
+        if(boshucre_bulundu)
+            break;
+    }
+    if(!boshucre_bulundu)
+    {
+        return 1;
+    }
+
+    int sayilar[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for(int i=0;i<N;i++)
+    {
+        int j=rand()%N;
+        int temp=sayilar[i];
+        temp = sayilar[i];
+        sayilar[i] = sayilar[j];
+        sayilar[j] = temp;
+    }
+
+    for(int i=0;i<N;i++)
+    {
+        int sayiDenemesi = sayilar[i];
+        char karakterSayi = sayiDenemesi + '0';
+
+        if(kontrol_et(tablo,satir,sutun,karakterSayi))
+        {
+            tablo[satir][sutun] = karakterSayi;
+            if(sudoku_coz(tablo))
+            {
+                return 1;
+            }
+            tablo[satir][sutun]='-';
+        }
+    }
+    return 0;
+    
 }
 
 int kontrol_et(char tablo[N][N],int satir,int sutun,int sayi)
