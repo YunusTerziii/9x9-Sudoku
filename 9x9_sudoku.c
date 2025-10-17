@@ -100,31 +100,10 @@ int kontrol_et(char tablo[N][N],int satir,int sutun,int sayi)
 }
 
 
- 
-
-void tabloyu_doldur(char tablo[N][N])
-{
-    int n = 0;
-
-    while(n<28)
-    {
-        int i = rand()%9;
-        int j = rand()%9;
-
-        if(tablo[i][j]=='-')
-        {
-            int x = rand()%9;
-            tablo[i][j]='1'+x;
-            n++;
-        }
-    }
-    tabloyu_yazdir(tablo);
-}
-
-
-
 
 int main() {
+    srand(time(NULL));
+
     char tablo[N][N];
 
     for(int i=0;i<N;i++)
